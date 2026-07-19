@@ -160,7 +160,9 @@ export default function HomePage({ locale }: { locale: Locale }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(getStructuredData(locale)) }}
       />
       <header className="site-header">
-        <a className="brand" href={`/${locale}#home`}><span>Premium</span> Bali Travel</a>
+        <a className="brand logo-brand" href={`/${locale}#home`} aria-label="Premium Bali Travel">
+          <img src="/logo.png" alt="Premium Bali Travel" />
+        </a>
         <nav className={menu ? "nav open" : "nav"}>
           {copy.nav.map((item, index) => {
             const ids = ["home", "services", "fleet", "how-it-works", "policies", "faq"];
@@ -239,7 +241,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
 
       <section className="final-cta"><div className="wrap center"><p className="eyebrow light">{copy.finalCta.eyebrow}</p><h2>{copy.finalCta.title}<br/><em>{copy.finalCta.emphasis}</em></h2><p>{copy.finalCta.copy}</p><a className="button button-gold" href="#vehicle-finder">{copy.finalCta.cta} ↑</a></div></section>
 
-      <footer><div className="wrap footer-grid"><div><a className="brand light" href={`/${locale}#home`}><span>Premium</span> Bali Travel</a><p>{copy.footer.copy}</p></div><div><h4>{copy.footer.explore}</h4>{copy.nav.slice(1).map((x,i)=>{ const ids=["services","fleet","how-it-works","policies","faq"]; return <a key={x} href={`#${ids[i]}`}>{x}</a>; })}</div><div><h4>{copy.footer.contact}</h4><a href={wa} target="_blank" rel="noreferrer">+62 812-4444-4268</a><span>{copy.footer.hours}</span></div></div><div className="wrap footer-bottom"><span>© 2026 Premium Bali Travel</span><div><a href="#policies">{copy.footer.privacy}</a><a href="#policies">{copy.footer.bookingPolicy}</a></div></div></footer>
+      <footer><div className="wrap footer-grid"><div><a className="brand light logo-brand footer-logo" href={`/${locale}#home`} aria-label="Premium Bali Travel"><img src="/logo.png" alt="Premium Bali Travel" /></a><p>{copy.footer.copy}</p></div><div><h4>{copy.footer.explore}</h4>{copy.nav.slice(1).map((x,i)=>{ const ids=["services","fleet","how-it-works","policies","faq"]; return <a key={x} href={`#${ids[i]}`}>{x}</a>; })}</div><div><h4>{copy.footer.contact}</h4><a href={wa} target="_blank" rel="noreferrer">+62 812-4444-4268</a><span>{copy.footer.hours}</span></div></div><div className="wrap footer-bottom"><span>© 2026 Premium Bali Travel</span><div><a href="#policies">{copy.footer.privacy}</a><a href="#policies">{copy.footer.bookingPolicy}</a></div></div></footer>
       <a className="floating-wa" href={wa} target="_blank" rel="noreferrer" aria-label={copy.footer.floatingAria}>{copy.footer.floating}</a>
     </main>
   );
