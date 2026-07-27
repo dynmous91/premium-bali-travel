@@ -50,7 +50,7 @@ export default function RootLayout({
             function gtag_report_conversion(url) {
               var callback = function () {
                 if (typeof(url) != 'undefined') {
-                  window.location = url;
+                  window.open(url, '_blank') || (window.location = url);
                 }
               };
               gtag('event', 'conversion', {

@@ -9,16 +9,22 @@ const googleReviewsUrl = "https://www.google.com/maps/place/Khas+Bali+-+Luxury+C
 
 declare global {
   interface Window {
+    gtag?: (...args: any[]) => void;
     gtag_report_conversion?: (url?: string) => boolean;
   }
 }
 
 const whatsappLinkProps = (url: string) => ({
   href: url,
-  onClick: (event: MouseEvent<HTMLAnchorElement>) => {
-    if (typeof window.gtag_report_conversion === "function") {
-      event.preventDefault();
-      window.gtag_report_conversion(url);
+  onClick: () => {
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "conversion", {
+        send_to: "AW-18334126641/X2cOCM7f4dIcELGksqZE",
+        value: 1.0,
+        currency: "IDR",
+      });
+    } else if (typeof window.gtag_report_conversion === "function") {
+      window.gtag_report_conversion();
     }
   },
   rel: "noreferrer",
