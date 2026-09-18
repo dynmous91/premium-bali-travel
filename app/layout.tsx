@@ -38,7 +38,7 @@ export default function RootLayout({
       <body>
         {children}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18334126641"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18000492314"
           strategy="afterInteractive"
         />
         <Script id="google-ads-tag" strategy="afterInteractive">
@@ -46,6 +46,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
+            gtag('config', 'AW-18000492314');
             gtag('config', 'AW-18334126641');
             function gtag_report_conversion(url) {
               var callback = function () {
@@ -53,10 +54,24 @@ export default function RootLayout({
                   window.open(url, '_blank') || (window.location = url);
                 }
               };
+              
+              // Generate or retrieve transaction ID
+              if (!window.transactionId) {
+                window.transactionId = "TX-" + Date.now() + "-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+              }
+              
+              gtag('event', 'conversion', {
+                'send_to': 'AW-18000492314/gQ9ACMnToNccEJrupodD',
+                'value': 1.0,
+                'currency': 'IDR',
+                'transaction_id': window.transactionId,
+                'event_callback': callback
+              });
               gtag('event', 'conversion', {
                 'send_to': 'AW-18334126641/X2cOCM7f4dIcELGksqZE',
                 'value': 1.0,
                 'currency': 'IDR',
+                'transaction_id': window.transactionId,
                 'event_callback': callback
               });
               return false;

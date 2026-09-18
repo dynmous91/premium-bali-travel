@@ -1,6 +1,6 @@
 "use client";
 
-import { type MouseEvent, useMemo, useState } from "react";
+import { type MouseEvent, useMemo, useState, useEffect } from "react";
 import { localeLabels, locales, type Locale } from "@/lib/locales";
 import { pageCopy } from "@/lib/page-copy";
 
@@ -11,17 +11,34 @@ declare global {
   interface Window {
     gtag?: (...args: any[]) => void;
     gtag_report_conversion?: (url?: string) => boolean;
+    transactionId?: string;
+    conversionValue?: number;
+    conversionCurrency?: string;
   }
 }
 
 const whatsappLinkProps = (url: string) => ({
   href: url,
   onClick: () => {
+    // Generate a transaction ID if it doesn't exist yet
+    if (typeof window !== 'undefined' && !window.transactionId) {
+      window.transactionId = "TX-" + Date.now() + "-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+    }
+
     if (typeof window.gtag === "function") {
-      window.gtag("event", "conversion", {
-        send_to: "AW-18334126641/X2cOCM7f4dIcELGksqZE",
+      const payload = {
         value: 1.0,
         currency: "IDR",
+        transaction_id: window.transactionId,
+      };
+      
+      window.gtag("event", "conversion", {
+        send_to: "AW-18000492314/gQ9ACMnToNccEJrupodD",
+        ...payload,
+      });
+      window.gtag("event", "conversion", {
+        send_to: "AW-18334126641/X2cOCM7f4dIcELGksqZE",
+        ...payload,
       });
     } else if (typeof window.gtag_report_conversion === "function") {
       window.gtag_report_conversion();
@@ -178,12 +195,26 @@ export default function HomePage({ locale }: { locale: Locale }) {
     color: color || copy.wa.noPreference,
   }));
 
+  useEffect(() => {
+    // Initialize transactionId on client mount so it's available for extraction
+    if (typeof window !== 'undefined' && !window.transactionId) {
+      window.transactionId = "TX-" + Date.now() + "-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+      window.conversionValue = 1.0;
+      window.conversionCurrency = "IDR";
+    }
+  }, []);
+
   return (
     <main>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(getStructuredData(locale)) }}
       />
+      {/* Hidden element for Google Ads to extract Transaction ID via CSS Selector */}
+      <input type="hidden" id="transaction-id" value={typeof window !== 'undefined' ? window.transactionId : ''} />
+      <input type="hidden" id="conversion-value" value="1.0" />
+      <input type="hidden" id="conversion-currency" value="IDR" />
+      
       <header className="site-header">
         <a className="brand logo-brand" href={`/${locale}#home`} aria-label="Premium Bali Travel">
           <img src="/logo-mark.png" alt="" aria-hidden="true" />
