@@ -35,14 +35,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        {children}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-16570112214"
-          strategy="afterInteractive"
-        />
-        <Script id="google-ads-tag" strategy="afterInteractive">
-          {`
+      <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16570112214"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -78,8 +75,12 @@ export default function RootLayout({
               return false;
             }
             window.gtag_report_conversion = gtag_report_conversion;
-          `}
-        </Script>
+            `,
+          }}
+        />
+      </head>
+      <body>
+        {children}
       </body>
     </html>
   );
