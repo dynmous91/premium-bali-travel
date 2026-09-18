@@ -33,10 +33,6 @@ const whatsappLinkProps = (url: string) => ({
       };
       
       window.gtag("event", "conversion", {
-        send_to: "AW-18000492314/gQ9ACMnToNccEJrupodD",
-        ...payload,
-      });
-      window.gtag("event", "conversion", {
         send_to: "AW-18334126641/LVb8CPGOzfscELGksqZE",
         ...payload,
       });

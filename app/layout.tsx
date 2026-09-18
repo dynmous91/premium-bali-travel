@@ -36,16 +36,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16570112214"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18334126641"></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'AW-18000492314');
             gtag('config', 'AW-18334126641');
-            gtag('config', 'AW-16570112214');
             function gtag_report_conversion(url) {
               var callback = function () {
                 if (typeof(url) != 'undefined') {
@@ -58,13 +56,6 @@ export default function RootLayout({
                 window.transactionId = "TX-" + Date.now() + "-" + Math.random().toString(36).substring(2, 8).toUpperCase();
               }
               
-              gtag('event', 'conversion', {
-                'send_to': 'AW-18000492314/gQ9ACMnToNccEJrupodD',
-                'value': 1.0,
-                'currency': 'IDR',
-                'transaction_id': window.transactionId,
-                'event_callback': callback
-              });
               gtag('event', 'conversion', {
                 'send_to': 'AW-18334126641/LVb8CPGOzfscELGksqZE',
                 'value': 1.0,
