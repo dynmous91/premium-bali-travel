@@ -48,6 +48,7 @@ export default function RootLayout({
             gtag('js', new Date());
             gtag('config', 'AW-18000492314');
             gtag('config', 'AW-18334126641');
+            gtag('config', 'AW-16570112214');
             function gtag_report_conversion(url) {
               var callback = function () {
                 if (typeof(url) != 'undefined') {
