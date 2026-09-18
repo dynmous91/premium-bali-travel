@@ -1,33 +1,14 @@
 "use client";
 
-import { type MouseEvent, useMemo, useState, useEffect } from "react";
+import { type MouseEvent, useMemo, useState } from "react";
 import { localeLabels, locales, type Locale } from "@/lib/locales";
 import { pageCopy } from "@/lib/page-copy";
 
 const whatsapp = (message: string) => `https://wa.me/6281244444268?text=${encodeURIComponent(message)}`;
 const googleReviewsUrl = "https://www.google.com/maps/place/Khas+Bali+-+Luxury+Car+Rental+%26+Premium+Transport+Service/@-8.7179025,115.1808644,17z/data=!4m8!3m7!1s0x2dd247b3caecb35b:0xb7688bf1404b25b!8m2!3d-8.7179078!4d115.1857353!9m1!1b1!16s%2Fg%2F11vs_w10gh?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D";
 
-declare global {
-  interface Window {
-    gtag?: (...args: any[]) => void;
-    gtag_report_conversion?: (url?: string) => boolean;
-    transactionId?: string;
-    conversionValue?: number;
-    conversionCurrency?: string;
-  }
-}
-
 const whatsappLinkProps = (url: string) => ({
   href: url,
-  onClick: () => {
-    if (typeof window.gtag === "function") {
-      window.gtag("event", "conversion", {
-        send_to: "AW-18334126641/3ss3CMqVjvwcELGksqZE",
-      });
-    } else if (typeof window.gtag_report_conversion === "function") {
-      window.gtag_report_conversion();
-    }
-  },
   rel: "noreferrer",
   target: "_blank",
 });
@@ -179,25 +160,12 @@ export default function HomePage({ locale }: { locale: Locale }) {
     color: color || copy.wa.noPreference,
   }));
 
-  useEffect(() => {
-    // Initialize transactionId on client mount so it's available for extraction
-    if (typeof window !== 'undefined' && !window.transactionId) {
-      window.transactionId = "TX-" + Date.now() + "-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-      window.conversionValue = 1.0;
-      window.conversionCurrency = "IDR";
-    }
-  }, []);
-
   return (
     <main>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(getStructuredData(locale)) }}
       />
-      {/* Hidden element for Google Ads to extract Transaction ID via CSS Selector */}
-      <input type="hidden" id="transaction-id" value={typeof window !== 'undefined' ? window.transactionId : ''} />
-      <input type="hidden" id="conversion-value" value="1.0" />
-      <input type="hidden" id="conversion-currency" value="IDR" />
       
       <header className="site-header">
         <a className="brand logo-brand" href={`/${locale}#home`} aria-label="Premium Bali Travel">
