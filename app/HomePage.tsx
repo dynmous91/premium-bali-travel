@@ -20,21 +20,9 @@ declare global {
 const whatsappLinkProps = (url: string) => ({
   href: url,
   onClick: () => {
-    // Generate a transaction ID if it doesn't exist yet
-    if (typeof window !== 'undefined' && !window.transactionId) {
-      window.transactionId = "TX-" + Date.now() + "-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-    }
-
     if (typeof window.gtag === "function") {
-      const payload = {
-        value: 1.0,
-        currency: "IDR",
-        transaction_id: window.transactionId,
-      };
-      
       window.gtag("event", "conversion", {
-        send_to: "AW-18334126641/LVb8CPGOzfscELGksqZE",
-        ...payload,
+        send_to: "AW-18334126641/3ss3CMqVjvwcELGksqZE",
       });
     } else if (typeof window.gtag_report_conversion === "function") {
       window.gtag_report_conversion();

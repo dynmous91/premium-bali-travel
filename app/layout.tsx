@@ -51,17 +51,9 @@ export default function RootLayout({
                 }
               };
               
-              // Generate or retrieve transaction ID
-              if (!window.transactionId) {
-                window.transactionId = "TX-" + Date.now() + "-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-              }
-              
               gtag('event', 'conversion', {
-                'send_to': 'AW-18334126641/LVb8CPGOzfscELGksqZE',
-                'value': 1.0,
-                'currency': 'IDR',
-                'transaction_id': window.transactionId,
-                'event_callback': callback
+                  'send_to': 'AW-18334126641/3ss3CMqVjvwcELGksqZE',
+                  'event_callback': callback
               });
               return false;
             }
