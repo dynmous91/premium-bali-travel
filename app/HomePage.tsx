@@ -37,7 +37,7 @@ const whatsappLinkProps = (url: string) => ({
         ...payload,
       });
       window.gtag("event", "conversion", {
-        send_to: "AW-18334126641/X2cOCM7f4dIcELGksqZE",
+        send_to: "AW-18334126641/LVb8CPGOzfscELGksqZE",
         ...payload,
       });
     } else if (typeof window.gtag_report_conversion === "function") {

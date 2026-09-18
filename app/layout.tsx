@@ -68,7 +68,7 @@ export default function RootLayout({
                 'event_callback': callback
               });
               gtag('event', 'conversion', {
-                'send_to': 'AW-18334126641/X2cOCM7f4dIcELGksqZE',
+                'send_to': 'AW-18334126641/LVb8CPGOzfscELGksqZE',
                 'value': 1.0,
                 'currency': 'IDR',
                 'transaction_id': window.transactionId,
