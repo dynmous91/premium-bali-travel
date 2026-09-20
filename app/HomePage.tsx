@@ -11,6 +11,13 @@ const whatsappLinkProps = (url: string) => ({
   href: url,
   rel: "noreferrer",
   target: "_blank",
+  onClick: () => {
+    if (typeof window !== "undefined" && typeof (window as any).gtag === "function") {
+      (window as any).gtag("event", "conversion", {
+        send_to: "AW-18334126641/IASWCLrBk_4cELGksqZE",
+      });
+    }
+  },
 });
 
 const formatMarkedUpPrice = (price: string) => {
