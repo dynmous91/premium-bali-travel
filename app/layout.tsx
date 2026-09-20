@@ -45,6 +45,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-5N63MG4R');`,
           }}
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18334126641"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads-gtag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18334126641');
+          `}
+        </Script>
       </head>
       <body>
         <noscript>
